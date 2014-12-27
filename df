@@ -1,0 +1,48 @@
+[1mdiff --git a/game.js b/game.js[m
+[1mindex 8b87936..5daadb0 100644[m
+[1m--- a/game.js[m
+[1m+++ b/game.js[m
+[36m@@ -408,7 +408,6 @@[m [mShip = function () {[m
+     }[m
+     if (KEY_STATUS.space) {[m
+       if (this.delayBeforeBullet <= 0) {[m
+[31m-        this.delayBeforeBullet = 10;[m
+         for (var i = 0; i < this.bullets.length; i++) {[m
+           if (!this.bullets[i].visible) {[m
+             SFX.laser();[m
+[36m@@ -917,7 +916,7 @@[m [mGame = {[m
+       this.state = 'waiting';[m
+     },[m
+     waiting: function () {[m
+[31m-      Text.renderText(ipad ? 'Touch Screen to Start' : 'Press Space to Start', 36, Game.canvasWidth/2 - 270, Game.canvasHeight/2);[m
+[32m+[m[32m      Text.renderText(window.ipad ? 'Touch Screen to Start' : 'Press Space to Start', 36, Game.canvasWidth/2 - 270, Game.canvasHeight/2);[m
+       if (KEY_STATUS.space || window.gameStart) {[m
+         KEY_STATUS.space = false; // hack so we don't shoot right away[m
+         window.gameStart = false;[m
+[1mdiff --git a/index.html b/index.html[m
+[1mindex 3d6e6f4..8aa618d 100644[m
+[1m--- a/index.html[m
+[1m+++ b/index.html[m
+[36m@@ -6,7 +6,6 @@[m
+     <script src="game.js"></script>[m
+     <style>[m
+       #canvas { border:1px solid black; top:0px; left:0px; }[m
+[31m-      #game-container { position:relative; top:0px; left:0px; }[m
+       .button { position:absolute; border:1px solid black; }[m
+       #left-controls { position:absolute; left:1px; bottom:0px; display:none; }[m
+       #right-controls { position:absolute; right:1px; bottom:0px; display:none; }[m
+[1mdiff --git a/ipad.js b/ipad.js[m
+[1mindex 2e34c39..03e0269 100644[m
+[1m--- a/ipad.js[m
+[1m+++ b/ipad.js[m
+[36m@@ -4,8 +4,8 @@[m [mif (ipad) {[m
+   $(function () {[m
+     $('#left-controls, #right-controls').show();[m
+     $('body > *').hide();[m
+[31m-    $('body').css('margin', '0px').css('background', 'black');[m
+[31m-    $('#game-container').width(1024).css('top', 26).show();[m
+[32m+[m[32m    $('body').css('margin', '0px').css('background', 'black').prepend($('#game-container').remove());[m
+[32m+[m[32m    $('#game-container').width(1024).css('margin-top', 26).show();[m
+     $('#canvas').attr('width', 1020).attr('height', 660).css('background', 'white').css('margin', '0 1');[m
+ [m
+     $('head').prepend($('<meta/>').attr('name', 'viewport').attr('content', 'width=device-width; height=device-height; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;'));[m
