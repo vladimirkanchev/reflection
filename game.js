@@ -176,7 +176,7 @@ Sprite = function () {
     if ($.isFunction(this.preMove)) {
       this.preMove(delta);
     }
-
+     \\
     this.vel.x += this.acc.x * delta;
     this.vel.y += this.acc.y * delta;
     this.x += this.vel.x * delta;
